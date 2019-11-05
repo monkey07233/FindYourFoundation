@@ -53,5 +53,22 @@ namespace FindYourFoundation.Repositoires
         {
             return Query<Product>("select * from Product where Product_Id = @Product_Id", new { Product_Id }).FirstOrDefault();
         }
+        public string ModifyProduct(Product product)
+        {
+            try
+            {
+                Execute("update Product set Brand=@Brand,Name=@Name,Info=@Info where Product_Id=@Product_Id",
+                    new {
+                        Brand = product.Brand,
+                        Name = product.Name,
+                        Info = product.Info,
+                        Product_Id = product.Product_Id
+                    });
+                return "修改成功";
+            }catch(Exception e)
+            {
+                return e.ToString();
+            }
+        }
     }
 }

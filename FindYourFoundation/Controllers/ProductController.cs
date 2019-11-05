@@ -55,8 +55,7 @@ namespace FindYourFoundation.Controllers
         [HttpPost]
         public string ModifyProduct(Product product)
         {
-
-            return "";
+            return _productRepo.ModifyProduct(product);
         }
         public string InsertProductPic()
         {
