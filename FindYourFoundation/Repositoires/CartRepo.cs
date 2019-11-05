@@ -31,14 +31,14 @@ namespace FindYourFoundation.Repositoires
                     productId = productId
                 });
         }
-        public void AddToCart(string acc, string productId)
+        public void AddToCart(string acc, int productId)
         {
             Execute(@"insert into Cart(Account,Product_Id)
                         values(@acc, @productId)"
                 , new
                 {
                     acc = acc,
-                    productId = Convert.ToInt32(productId)
+                    productId = productId
                 });
         }
     }
