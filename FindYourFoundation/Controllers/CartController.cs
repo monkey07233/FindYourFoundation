@@ -31,8 +31,7 @@ namespace FindYourFoundation.Controllers
         public string AddToCart(CartViewModel cart)
         {
             var jwtObject = GetjwtToken();
-            _cartService.AddToCart(jwtObject["Account"].ToString(), cart.Product_Id);
-            return "新增成功";
+            return _cartService.AddToCart(jwtObject["Account"].ToString(), cart.Product_Id);
         }
         [HttpPost]
         public string DeleteCartById(CartViewModel cart)

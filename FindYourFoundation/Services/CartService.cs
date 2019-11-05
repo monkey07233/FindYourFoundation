@@ -23,9 +23,23 @@ namespace FindYourFoundation.Services
         {
             _cartRepo.DeleteCartById(acc, productId);
         }
-        public void AddToCart(string acc, int productId)
+        public string AddToCart(string acc, int productId)
         {
-            _cartRepo.AddToCart(acc, productId);
+            var cart = _cartRepo.GetCartByAcc(acc);
+            bool isHave = true;
+            foreach(var c in cart)
+            {
+                if (c.Product_Id == productId) { isHave = false; }
+            }
+            if (isHave)
+            {
+                _cartRepo.AddToCart(acc, productId);
+                return "新增成功";
+            }
+            else
+            {
+                return "已在購物車";
+            }            
         }
     }
 }
