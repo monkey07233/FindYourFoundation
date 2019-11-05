@@ -38,6 +38,7 @@ namespace FindYourFoundation.Controllers
                         {"status",true },
                         {"message","登入成功" },
                         {"token",jwtToken },
+                        {"IsAdmin", customer.Admin},
                     });
                 }
             }
@@ -48,6 +49,7 @@ namespace FindYourFoundation.Controllers
                     {"status",false },
                     {"message","帳號或密碼錯誤" },
                     {"token",null },
+                    {"IsAdmin",false },
                 });
             }
             return result;
