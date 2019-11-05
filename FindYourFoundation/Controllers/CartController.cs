@@ -28,10 +28,10 @@ namespace FindYourFoundation.Controllers
             return null;
         }
         [HttpPost]
-        public string AddToCart(CartViewModel cart)
+        public string AddToCart(string Product_Id)
         {
             var jwtObject = GetjwtToken();
-            _cartService.AddToCart(jwtObject["Account"].ToString(), cart.Product_Id);
+            _cartService.AddToCart(jwtObject["Account"].ToString(), Product_Id);
             return "新增成功";
         }
         [HttpPost]

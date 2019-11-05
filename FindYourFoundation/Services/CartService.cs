@@ -23,7 +23,7 @@ namespace FindYourFoundation.Services
         {
             _cartRepo.DeleteCartById(acc, productId);
         }
-        public void AddToCart(string acc, int productId)
+        public void AddToCart(string acc, string productId)
         {
             _cartRepo.AddToCart(acc, productId);
         }
