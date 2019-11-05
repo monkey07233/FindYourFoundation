@@ -11,7 +11,7 @@ namespace FindYourFoundation.Repositoires
     {
         public List<CartViewModel> GetCartByAcc(string acc)
         {
-            return Query<CartViewModel>(@"select a.Brand,a.[Name],a.Color,a.Ticket,a.Info
+            return Query<CartViewModel>(@"select a.Product_Id,a.Brand,a.[Name],a.Color,a.Ticket,a.Info
                                 from Product as a,Cart as b
                                 where a.Product_Id = b.Product_Id and b.Account = @acc"
                                 , new
