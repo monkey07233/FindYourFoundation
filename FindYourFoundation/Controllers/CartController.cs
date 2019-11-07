@@ -4,6 +4,7 @@ using FindYourFoundation.ViewModels;
 using Jose;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -23,6 +24,10 @@ namespace FindYourFoundation.Controllers
             var cart = _cartService.GetCartByAcc(jwtObject["Account"].ToString());
             if (cart != null)
             {
+                foreach(var c in cart)
+                {
+                    c.Url = "~/ProductPic/"+Path.GetFileNameWithoutExtension(c.Url) + Path.GetExtension(c.Url);
+                }
                 return cart;
             }
             return null;
