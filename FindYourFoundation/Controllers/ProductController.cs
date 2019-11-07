@@ -1,13 +1,11 @@
 ﻿using FindYourFoundation.Models;
 using FindYourFoundation.Repositoires;
 using FindYourFoundation.Services;
-using Jose;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
@@ -18,7 +16,6 @@ namespace FindYourFoundation.Controllers
     {
         private ProductService _productService = new ProductService();
         private ProductRepo _productRepo = new ProductRepo();
-        private string secret = "FindYourFoundation";
         // GET: Product
         [HttpGet]
         public List<Product> GetProducts()
@@ -46,25 +43,19 @@ namespace FindYourFoundation.Controllers
             }
         }
         [HttpPost]
-        public string DeleteProduct(Product product)
+        public string DeleteProduct(string Product_Id)
         {
-            return _productRepo.DeleteProduct(product.Product_Id);
+            return _productRepo.DeleteProduct(Product_Id);
         }
         [HttpGet]
-        public Product GetProductById(Product product)
+        public Product GetProductById(string Product_Id)
         {
-            return _productRepo.GetProductById(product.Product_Id);
+            return _productRepo.GetProductById(Product_Id);
         }
         [HttpPost]
         public string ModifyProduct(Product product)
         {
             return _productRepo.ModifyProduct(product);
-        }
-        [HttpPost]
-        public string AddFavorite(Product product)
-        {
-            var jwtObject = GetjwtToken();
-            return _productService.AddFavorite(jwtObject["Account"].ToString(), product.Product_Id);
         }
         public string InsertProductPic()
         {
@@ -95,17 +86,6 @@ namespace FindYourFoundation.Controllers
                 return "請選擇上傳圖片";
             }
         }
-        public Dictionary<string, object> GetjwtToken()
-        {
-            var jwtObject = Jose.JWT.Decode<Dictionary<string, Object>>(
-                    ActionContext.Request.Headers.Authorization.Parameter,
-                    Encoding.UTF8.GetBytes(secret), JwsAlgorithm.HS512);
-            return jwtObject;
-        }
-
-
-
-
         //public int test()
         //{
         //    return new DataMiningService().GetPrice();

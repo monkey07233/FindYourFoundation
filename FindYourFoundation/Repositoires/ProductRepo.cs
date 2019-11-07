@@ -38,7 +38,7 @@ namespace FindYourFoundation.Repositoires
                 return e.ToString();
             }
         }
-        public string DeleteProduct(int Product_Id)
+        public string DeleteProduct(string Product_Id)
         {
             try
             {
@@ -49,7 +49,7 @@ namespace FindYourFoundation.Repositoires
                 return e.ToString();
             }
         }
-        public Product GetProductById(int Product_Id)
+        public Product GetProductById(string Product_Id)
         {
             return Query<Product>("select * from Product where Product_Id = @Product_Id", new { Product_Id }).FirstOrDefault();
         }
@@ -65,27 +65,6 @@ namespace FindYourFoundation.Repositoires
                         Product_Id = product.Product_Id
                     });
                 return "修改成功";
-            }catch(Exception e)
-            {
-                return e.ToString();
-            }
-        }
-        public Favorite CheckFavorite(string Account,int Product_Id)
-        {
-            return Query<Favorite>("select * from Favorite where Account = @Account and Product_Id = @Product_Id", new { Account,Product_Id }).FirstOrDefault();
-        }
-        public string AddFavorite(string Account,int Product_Id)
-        {
-            try
-            {
-                Execute(@"insert into Favorite(Account,Product_Id,Favorite_Time)
-                        values(@account,@product_id,@favorite_time)",
-                        new {
-                            account=Account,
-                            product_id=Product_Id,
-                            favorite_time=DateTime.Now
-                        });
-                return "新增成功";
             }catch(Exception e)
             {
                 return e.ToString();
