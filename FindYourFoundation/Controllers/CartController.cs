@@ -26,7 +26,7 @@ namespace FindYourFoundation.Controllers
             {
                 foreach (var c in cart)
                 {
-                    c.Url = "~/ProductPic/" + Path.GetFileNameWithoutExtension(c.Url) + Path.GetExtension(c.Url);
+                    c.Url = "/ProductPic/" + Path.GetFileNameWithoutExtension(c.Url) + Path.GetExtension(c.Url);
                 }
                 return cart;
             }
