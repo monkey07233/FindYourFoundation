@@ -229,6 +229,7 @@
     <Compile Include="Models\UserPic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositoires\CartRepo.cs" />
+    <Compile Include="Repositoires\CouponRepo.cs" />
     <Compile Include="Repositoires\CustomerRepo.cs" />
     <Compile Include="Repositoires\DataAccessLayer.cs" />
     <Compile Include="Repositoires\ProductPicRepo.cs" />

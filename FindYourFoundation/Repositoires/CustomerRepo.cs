@@ -65,6 +65,14 @@ namespace FindYourFoundation.Repositoires
                         address = customer.Address,
                         account=account
                     });
-        }        
+        }
+        public List<Customer> GetCustomers()
+        {
+            return Query<Customer>("select * from Customer order by RegisterTime").ToList();
+        }
+        public List<Customer> GetCustomersDesc()
+        {
+            return Query<Customer>("select * from Customer order by RegisterTime desc").ToList();
+        }
     }
 }
