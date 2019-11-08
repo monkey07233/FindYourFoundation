@@ -74,5 +74,9 @@ namespace FindYourFoundation.Repositoires
         {
             return Query<Customer>("select * from Customer order by RegisterTime desc").ToList();
         }
+        public List<Customer> SearchCustomer(string Search)
+        {
+            return Query<Customer>("select * from Customer where Account like '%@Search%' or Name like '%@Search%'",new { Search}).ToList();
+        }
     }
 }

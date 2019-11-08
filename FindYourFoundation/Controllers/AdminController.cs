@@ -28,5 +28,10 @@ namespace FindYourFoundation.Controllers
         {
             return _customerRepo.GetCustomersDesc();
         }
+        [HttpPost]
+        public List<Customer> SearchCustomer(string search)
+        {
+            return _customerRepo.SearchCustomer(search);
+        }
     }
 }
