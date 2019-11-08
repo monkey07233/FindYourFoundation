@@ -25,7 +25,7 @@ namespace FindYourFoundation.Repositoires
         }
         public void DeleteCartById(string acc,int productId)
         {
-            Execute("delete from Cart where Account = @acc and ProductId = @productId"
+            Execute("delete from Cart where Account = @acc and Product_Id = @productId"
                 , new {
                     acc = acc,
                     productId = productId
