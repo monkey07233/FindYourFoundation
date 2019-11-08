@@ -1,6 +1,7 @@
 ﻿using FindYourFoundation.Models;
 using FindYourFoundation.Repositoires;
 using FindYourFoundation.Services;
+using FindYourFoundation.ViewModels;
 using Jose;
 using System;
 using System.Collections.Generic;
@@ -21,9 +22,17 @@ namespace FindYourFoundation.Controllers
         private string secret = "FindYourFoundation";
         // GET: Product
         [HttpGet]
-        public List<Product> GetProducts()
+        public List<ProductViewModel> GetProducts()
         {
-            return _productRepo.GetProducts();
+            var product = _productRepo.GetProducts();
+            if (product != null)
+            {
+                foreach (var p in product)
+                {
+                    p.Url = "/ProductPic/" + Path.GetFileNameWithoutExtension(p.Url) + Path.GetExtension(p.Url);
+                }
+            }
+            return product;
         }
         [HttpPost]
         public string AddProduct()
