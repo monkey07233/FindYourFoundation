@@ -11,7 +11,7 @@ namespace FindYourFoundation.Repositoires
     {
         public List<ProductViewModel> GetProducts()
         {
-            return Query<ProductViewModel>("select a.Product_Id,a.Brand,a.Name,a.Original_price,a.Cheapest_price,b.[Url] from Product as a,ProductPic as b where a.Product_Id = b.Product_Id").ToList();
+            return Query<ProductViewModel>("select a.Product_Id,a.Brand,a.Name,a.Info,a.Original_price,a.Cheapest_price,b.[Url] from Product as a,ProductPic as b where a.Product_Id = b.Product_Id").ToList();
         }
         public List<Product> GetProductsForAdmin()
         {
