@@ -220,6 +220,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Cart.cs" />
+    <Compile Include="Models\Coupon.cs" />
+    <Compile Include="Models\CouponRecord.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Favorite.cs" />
     <Compile Include="Models\Product.cs" />
@@ -232,6 +234,7 @@
     <Compile Include="Repositoires\ProductPicRepo.cs" />
     <Compile Include="Repositoires\ProductRepo.cs" />
     <Compile Include="Repositoires\UserPicRepo.cs" />
+    <Compile Include="Services\AutoSendCoupon.cs" />
     <Compile Include="Services\CartService.cs" />
     <Compile Include="Services\CustomerService.cs" />
     <Compile Include="Services\DataMiningService.cs" />
@@ -243,6 +246,7 @@
     <Compile Include="ViewModels\CartViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\PasswordViewModel.cs" />
+    <Compile Include="ViewModels\ProductViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
