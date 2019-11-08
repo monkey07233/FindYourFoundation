@@ -50,10 +50,11 @@ namespace FindYourFoundation.Repositoires
         {
             Execute("update Customer set Password = @pwd where Account = @acc", new { pwd = pwd, acc = acc });
         }
-        public void UpdateUser(Customer customer)
+        public void UpdateUser(Customer customer,string account)
         {
             Execute(@"update Customer
-                        set Name=@name,Gender=@gender,Birthday=@birthday,Email=@email,Phone=@phone,Address=@address"
+                        set Name=@name,Gender=@gender,Birthday=@birthday,Email=@email,Phone=@phone,Address=@address
+                        where Account=@account"
                     , new
                     {
                         name = customer.Name,
@@ -61,7 +62,8 @@ namespace FindYourFoundation.Repositoires
                         birthday = customer.Birthday,
                         email = customer.Email,
                         phone = customer.Phone,
-                        address = customer.Address
+                        address = customer.Address,
+                        account=account
                     });
         }        
     }

@@ -79,7 +79,7 @@ namespace FindYourFoundation.Controllers
                 var getcustomer = _customerService.GetUserByAcc(jwtObject["Account"].ToString());
                 if (getcustomer != null)
                 {
-                    _customerService.UpdateUser(customer);
+                    _customerService.UpdateUser(customer, jwtObject["Account"].ToString());
                     return "儲存成功";
                 }
                 else

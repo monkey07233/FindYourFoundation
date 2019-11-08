@@ -44,9 +44,9 @@ namespace FindYourFoundation.Services
         {
             return _customerRepo.GetUserByAcc(acc);
         }
-        public void UpdateUser(Customer customer)
+        public void UpdateUser(Customer customer,string account)
         {
-            _customerRepo.UpdateUser(customer);
+            _customerRepo.UpdateUser(customer,account);
         }        
     }
 }
