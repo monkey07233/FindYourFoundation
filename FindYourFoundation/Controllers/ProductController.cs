@@ -59,15 +59,10 @@ namespace FindYourFoundation.Controllers
         {
             return _productRepo.DeleteProduct(product.Product_Id);
         }
-        [HttpGet]
-        public Product GetProductById(Product product)
-        {
-            return _productRepo.GetProductById(product.Product_Id);
-        }
         [HttpPost]
-        public string ModifyProduct(Product product)
+        public string OutProduct(Product product)
         {
-            return _productRepo.ModifyProduct(product);
+            return _productRepo.OutProduct(product.Product_Id);
         }
         [HttpPost]
         public string AddFavorite(Product product)

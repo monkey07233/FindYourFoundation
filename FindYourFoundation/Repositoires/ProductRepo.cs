@@ -11,16 +11,16 @@ namespace FindYourFoundation.Repositoires
     {
         public List<ProductViewModel> GetProducts()
         {
-            return Query<ProductViewModel>("select a.Product_Id,a.Brand,a.Name,a.Info,a.Original_price,a.Cheapest_price,b.[Url] from Product as a,ProductPic as b where a.Product_Id = b.Product_Id").ToList();
+            return Query<ProductViewModel>("select a.Product_Id,a.Brand,a.Name,a.Info,a.Original_price,a.Cheapest_price,b.[Url] from Product as a,ProductPic as b where a.Product_Id = b.Product_Id and a.IsOut = 0").ToList();
         }
         public List<Product> GetProductsForAdmin()
         {
-            return Query<Product>("select * from Product").ToList();
-            //return Query<Product>("select * from Product order by Cheapest_price desc").ToList();
+            return Query<Product>("select * from Product where IsOut = 0").ToList();
+            //return Query<Product>("select * from Product where IsOut = 0 order by Cheapest_price desc").ToList();
         }
         public List<string> GetProductName()
         {
-            return Query<string>("select Name from Product").ToList();
+            return Query<string>("select Name from Product where IsOut = 0").ToList();
         }
         public string AddProduct(Product product)
         {
@@ -55,21 +55,11 @@ namespace FindYourFoundation.Repositoires
                 return e.ToString();
             }
         }
-        public Product GetProductById(int Product_Id)
-        {
-            return Query<Product>("select * from Product where Product_Id = @Product_Id", new { Product_Id }).FirstOrDefault();
-        }
-        public string ModifyProduct(Product product)
+        public string OutProduct(int Product_Id)
         {
             try
             {
-                Execute("update Product set Brand=@Brand,Name=@Name,Info=@Info where Product_Id=@Product_Id",
-                    new {
-                        Brand = product.Brand,
-                        Name = product.Name,
-                        Info = product.Info,
-                        Product_Id = product.Product_Id
-                    });
+                Execute("update Product set IsOut=1 where Product_Id=@Product_Id",new { Product_Id });
                 return "修改成功";
             }catch(Exception e)
             {
