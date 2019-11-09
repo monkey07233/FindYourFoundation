@@ -30,16 +30,29 @@ namespace FindYourFoundation.Controllers
             var result = new JArray();
             if (customer != null)
             {
-                string jwtToken = _jwtAuthorizeServices.CreateToken(customer);
-                if (jwtToken != null)
+                if (customer.Permission == 1)
                 {
                     result.Add(new JObject
                     {
-                        {"status",true },
-                        {"message","登入成功" },
-                        {"token",jwtToken },
-                        {"IsAdmin", customer.Admin},
+                        {"status",false },
+                        {"message","你的帳號已被停權" },
+                        {"token",null },
+                        {"IsAdmin",false },
                     });
+                }
+                else
+                {
+                    string jwtToken = _jwtAuthorizeServices.CreateToken(customer);
+                    if (jwtToken != null)
+                    {
+                        result.Add(new JObject
+                        {
+                            {"status",true },
+                            {"message","登入成功" },
+                            {"token",jwtToken },
+                            {"IsAdmin", customer.Admin},
+                        });
+                    }
                 }
             }
             else

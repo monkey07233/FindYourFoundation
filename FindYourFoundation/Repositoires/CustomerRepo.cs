@@ -41,16 +41,16 @@ namespace FindYourFoundation.Repositoires
                     });
                 return "註冊成功";
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return e.ToString();
-            }            
+            }
         }
         public void UpdatePassword(string acc, string pwd)
         {
             Execute("update Customer set Password = @pwd where Account = @acc", new { pwd = pwd, acc = acc });
         }
-        public void UpdateUser(Customer customer,string account)
+        public void UpdateUser(Customer customer, string account)
         {
             Execute(@"update Customer
                         set Name=@name,Gender=@gender,Birthday=@birthday,Email=@email,Phone=@phone,Address=@address
@@ -63,7 +63,7 @@ namespace FindYourFoundation.Repositoires
                         email = customer.Email,
                         phone = customer.Phone,
                         address = customer.Address,
-                        account=account
+                        account = account
                     });
         }
         public List<Customer> GetCustomers()
@@ -76,7 +76,31 @@ namespace FindYourFoundation.Repositoires
         }
         public List<Customer> SearchCustomer(string Search)
         {
-            return Query<Customer>("select * from Customer where Account like '%"+@Search+"%' or Name like '%"+@Search+"%'",new { Search}).ToList();
+            return Query<Customer>("select * from Customer where Account like '%" + @Search + "%' or Name like '%" + @Search + "%'", new { Search }).ToList();
+        }
+        public string AddBlackList(Customer customer)
+        {
+            try
+            {
+                Execute("update Customer set Permission=1 where Account = @Account", new { Account = customer.Account });
+                return "停權成功";
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
+        public string DeleteBlackList(Customer customer)
+        {
+            try
+            {
+                Execute("update Customer set Permission=0 where Account = @Account", new { Account = customer.Account });
+                return "取消停權成功";
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
         }
     }
 }

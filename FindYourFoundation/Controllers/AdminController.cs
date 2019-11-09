@@ -33,5 +33,15 @@ namespace FindYourFoundation.Controllers
         {
             return _customerRepo.SearchCustomer(search);
         }
+        [HttpPost]
+        public string AddBlackList(Customer customer)
+        {
+            return _customerRepo.AddBlackList(customer);
+        }
+        [HttpPost]
+        public string DeleteBlackList(Customer customer)
+        {
+            return _customerRepo.DeleteBlackList(customer);
+        }
     }
 }
