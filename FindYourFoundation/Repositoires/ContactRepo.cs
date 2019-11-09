@@ -8,6 +8,10 @@ namespace FindYourFoundation.Repositoires
 {
     public class ContactRepo : DataAccessLayer
     {
+        public List<Contact> GetContacts()
+        {
+            return Query<Contact>("select * from Contact").ToList();
+        }
         public string AddContact(Contact contact)
         {
             try

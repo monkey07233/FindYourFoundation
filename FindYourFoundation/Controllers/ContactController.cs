@@ -12,6 +12,12 @@ namespace FindYourFoundation.Controllers
     {
         private ContactRepo _contactRepo = new ContactRepo();
         // GET: Contact
+        [HttpGet]
+        public List<Contact> GetContacts()
+        {
+            return _contactRepo.GetContacts();
+        }
+        [HttpPost]
         public string AddContact(Contact contact)
         {
             return _contactRepo.AddContact(contact);
