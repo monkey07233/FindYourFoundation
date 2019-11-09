@@ -41,5 +41,24 @@ namespace FindYourFoundation.Services
                 return "已在購物車";
             }            
         }
+        public string BuyProducts(CartViewModel cart,string Account)
+        {
+            if (cart.cartList != null)
+            {
+                foreach(var c in cart.cartList)
+                {
+                    _cartRepo.AddBuyProduct(c,Account);                    
+                }
+                if (cart.CouponRecord_Id != -1)
+                {
+                    new CouponRepo().UseCoupon(cart.CouponRecord_Id);
+                }                
+                return "購買成功";
+            }
+            else
+            {
+                return "購買失敗";
+            }
+        }
     }
 }

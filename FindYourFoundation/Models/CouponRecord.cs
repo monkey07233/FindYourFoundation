@@ -12,5 +12,6 @@ namespace FindYourFoundation.Models
         public int Type { get; set; }
         public string IsUse { get; set; }
         public DateTime CouponTime { get; set; }
+        public DateTime ExpiryTime { get; set; }
     }
 }

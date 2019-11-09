@@ -12,5 +12,9 @@ namespace FindYourFoundation.ViewModels
         public string Name { get; set; }
         public int Cheapest_price { get; set; }
         public string Url { get; set; }
+        public int Quantity { get; set; }
+
+        public List<CartViewModel> cartList { get; set; }
+        public int CouponRecord_Id { get; set; }
     }
 }

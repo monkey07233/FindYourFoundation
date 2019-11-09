@@ -45,6 +45,12 @@ namespace FindYourFoundation.Controllers
             _cartService.DeleteCartById(jwtObject["Account"].ToString(), cart.Product_Id);
             return "刪除成功";
         }
+        [HttpPost]
+        public string BuyProducts(CartViewModel cart)
+        {
+            var jwtObject = GetjwtToken();
+            return _cartService.BuyProducts(cart,jwtObject["Account"].ToString());
+        }
         public Dictionary<string, object> GetjwtToken()
         {
             var jwtObject = Jose.JWT.Decode<Dictionary<string, Object>>(

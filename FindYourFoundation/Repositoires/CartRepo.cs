@@ -41,5 +41,18 @@ namespace FindYourFoundation.Repositoires
                     productId = productId
                 });
         }
+        public void AddBuyProduct(CartViewModel cart,string Account)
+        {
+            Execute(@"insert into BuyHisory(Account,Product_Id,Price,Quantity,BuyTime)
+                        values(@account,@product_Id,@price,@quantity,@buyTime)"
+                , new
+                {
+                    account = Account,
+                    product_Id = cart.Product_Id,
+                    price = cart.Cheapest_price,
+                    quantity = cart.Quantity,
+                    buyTime = DateTime.Now
+                });
+        }
     }
 }
