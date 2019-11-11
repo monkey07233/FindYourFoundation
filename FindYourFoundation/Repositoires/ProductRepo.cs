@@ -89,5 +89,9 @@ namespace FindYourFoundation.Repositoires
                 return e.ToString();
             }
         }
+        public void UpdatePrice(string name,int price)
+        {
+            Execute(@"update Product set Cheapest_price = @price where Name = @name", new { price,name });
+        }
     }
 }

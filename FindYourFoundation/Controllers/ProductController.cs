@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -106,57 +107,42 @@ namespace FindYourFoundation.Controllers
                     Encoding.UTF8.GetBytes(secret), JwsAlgorithm.HS512);
             return jwtObject;
         }
-
-
-
-
-        //public int test()
-        //{
-        //    return new DataMiningService().GetPrice();
-        //}
-        static int price = 0;
-        public async Task<int> test()
+        public async void GetCheapPrice()
         {
-            string FileName = @"wastons.py";
-            await RunPython(FileName, "-u", "夢幻奇蹟無瑕粉底液");
-            return price;
-        }
-        public static async Task RunPython(string name, string args, string pro)
-        {
-            await Task.Run(() => {
-                Process process = new Process();
-                //string path = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + name;
-                string path = @"D:/Python/" + name;
-                process.StartInfo.FileName = @"D:/Anaconda3/python.exe";
-                path += " " + pro;
-                process.StartInfo.Arguments = path;
-                process.StartInfo.UseShellExecute = false;
-                process.StartInfo.RedirectStandardOutput = true;
-                process.StartInfo.RedirectStandardInput = true;
-                process.StartInfo.RedirectStandardError = true;
-                process.StartInfo.CreateNoWindow = true;
-                
-                process.OutputDataReceived += new DataReceivedEventHandler(OutputData);
-                using (process)
-                {
-                    process.Start();
-                    process.BeginOutputReadLine();
-                    process.WaitForExit();
-                    process.Close();
-                }
-            });  
-        }
-        static void OutputData(object sender, DataReceivedEventArgs e)
-        {
-            if (!string.IsNullOrEmpty(e.Data))
+            var ParityList = new List<Parity>();
+            string[] ShopList = { "books", "cosmed", "momo", "wastons", "yahoobuy", "yahoomall" };
+            var NameList = _productRepo.GetProductName();
+            foreach (var Name in NameList)
             {
-                if (e.Data.ToString() == "None")
+                foreach (var Shop in ShopList)
                 {
-
+                    var parity = new Parity();
+                    var price = await new DataMiningService().GetPrice(Name,Shop);
+                    parity.ProductName = Name;
+                    parity.ShopName = Shop;
+                    parity.Price = price;
+                    ParityList.Add(parity);                    
                 }
-                price = Convert.ToInt32(e.Data);
-                Console.WriteLine(e.Data);
             }
+            var cheapPrice =
+                from parity in ParityList
+                where parity.Price > 0
+                group parity by parity.ProductName into parityGroup
+                select new
+                {
+                    Name = parityGroup.Key,
+                    Price = parityGroup.Min(p => p.Price),
+                };
+            foreach(var list in cheapPrice)
+            {
+                _productRepo.UpdatePrice(list.Name, list.Price);
+            }
+        }
+        public class Parity
+        {
+            public string ProductName { get; set; }
+            public string ShopName { get; set; }
+            public int Price { get; set; }
         }
     }
 }

@@ -16,14 +16,17 @@ namespace FindYourFoundation.Services
             {
                 IScheduler scheduler = new StdSchedulerFactory().GetScheduler();
 
-                //IJobDetail autoSendCoupon = JobBuilder.Create<AutoSendCoupon>()
-                //    .WithIdentity("AutoSendCoupon")
-                //    .Build();
-                //ITrigger trigger= TriggerBuilder.Create()
-                //                .WithCronSchedule("0 0/1 * * * ?")
-                //                .WithIdentity("SendMailTrigger")
-                //                .Build();
-                //scheduler.ScheduleJob(autoSendCoupon, trigger);
+                IJobDetail monthCouponJob = JobBuilder.Create<MonthCoupon>().WithIdentity("MonthCoupon").Build();
+
+                ITrigger monthCouponTrigger = TriggerBuilder.Create()
+                                .WithCronSchedule("0 0/1 * * * ?")
+                                .WithIdentity("monthCouponTrigger")
+                                .Build();
+
+
+
+                scheduler.ScheduleJob(monthCouponJob, monthCouponTrigger);
+                scheduler.Start();
             }
         }
     }

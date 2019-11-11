@@ -21,6 +21,8 @@ namespace FindYourFoundation
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             GlobalConfiguration.Configuration.Filters.Add(new JwtAuthFilter());
             GlobalConfiguration.Configuration.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
+
+            JobScheduler.Start(true);
         }
     }
 }
