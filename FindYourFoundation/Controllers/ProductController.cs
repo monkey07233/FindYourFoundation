@@ -35,6 +35,11 @@ namespace FindYourFoundation.Controllers
             }
             return product;
         }
+        [HttpGet]
+        public ProductViewModel GetProductById(Product product)
+        {
+            return _productRepo.GetProductById(product.Product_Id);
+        }
         [HttpPost]
         public string AddProduct()
         {

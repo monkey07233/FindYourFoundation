@@ -22,6 +22,10 @@ namespace FindYourFoundation.Repositoires
         {
             return Query<string>("select Name from Product where IsOut = 0").ToList();
         }
+        public ProductViewModel GetProductById(int Product_Id)
+        {
+            return Query<ProductViewModel>("select a.Product_Id,a.Brand,a.Name,a.Info,a.Original_price,a.Cheapest_price,b.[Url] from Product as a,ProductPic as b where a.Product_Id = b.Product_Id and a.IsOut = 0 and a.Product_Id = @Product_Id",new { Product_Id }).FirstOrDefault();
+        }
         public string AddProduct(Product product)
         {
             try
