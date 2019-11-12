@@ -12,7 +12,17 @@ namespace FindYourFoundation.Services
         private static CouponRepo _couponRepo = new CouponRepo();
         public void Execute(IJobExecutionContext context)
         {
-            AutoSendBirthdayCoupon();
+            test();
+            //AutoSendBirthdayCoupon();
+            //AutoSendAnniversaryCoupon();
+        }
+        private static void test()
+        {
+            var customer = new CustomerRepo().GetCustomers();
+            foreach (var c in customer)
+            {
+                _couponRepo.AddBirthdayCoupon(c.Account);
+            }
         }
         private static void AutoSendBirthdayCoupon()
         {
