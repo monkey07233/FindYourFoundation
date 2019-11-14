@@ -19,7 +19,7 @@ namespace FindYourFoundation.Services
                 IJobDetail monthCouponJob = JobBuilder.Create<MonthCoupon>().WithIdentity("MonthCoupon").Build();
 
                 ITrigger monthCouponTrigger = TriggerBuilder.Create()
-                                .WithCronSchedule("0 0/1 * * * ?")
+                                .WithCronSchedule("0 0 12 1 * ?")
                                 .WithIdentity("monthCouponTrigger")
                                 .Build();
 
