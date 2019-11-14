@@ -43,7 +43,7 @@ namespace FindYourFoundation.Repositoires
         }
         public void AddBuyProduct(CartViewModel cart,string Account)
         {
-            Execute(@"insert into BuyHisory(Account,Product_Id,Price,Quantity,BuyTime)
+            Execute(@"insert into BuyHistory(Account,Product_Id,Price,Quantity,BuyTime)
                         values(@account,@product_Id,@price,@quantity,@buyTime)"
                 , new
                 {
