@@ -9,9 +9,13 @@ namespace FindYourFoundation.Repositoires
 {
     public class ProductRepo:DataAccessLayer
     {
+        public List<ProductViewModel> GetProductsDesc()
+        {
+            return Query<ProductViewModel>("select a.Product_Id,a.Brand,a.Name,a.Info,a.Original_price,a.Cheapest_price,b.[Url] from Product as a,ProductPic as b where a.Product_Id = b.Product_Id and a.IsOut = 0 order by a.Cheapest_price desc").ToList();
+        }
         public List<ProductViewModel> GetProducts()
         {
-            return Query<ProductViewModel>("select a.Product_Id,a.Brand,a.Name,a.Info,a.Original_price,a.Cheapest_price,b.[Url] from Product as a,ProductPic as b where a.Product_Id = b.Product_Id and a.IsOut = 0").ToList();
+            return Query<ProductViewModel>("select a.Product_Id,a.Brand,a.Name,a.Info,a.Original_price,a.Cheapest_price,b.[Url] from Product as a,ProductPic as b where a.Product_Id = b.Product_Id and a.IsOut = 0 order by a.Cheapest_price").ToList();
         }
         public List<Product> GetProductsForAdmin()
         {

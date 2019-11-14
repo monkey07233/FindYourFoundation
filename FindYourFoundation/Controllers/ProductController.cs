@@ -23,6 +23,19 @@ namespace FindYourFoundation.Controllers
         private string secret = "FindYourFoundation";
         // GET: Product
         [HttpGet]
+        public List<ProductViewModel> GetProductsDesc()
+        {
+            var product = _productRepo.GetProductsDesc();
+            if (product != null)
+            {
+                foreach (var p in product)
+                {
+                    p.Url = "/ProductPic/" + Path.GetFileNameWithoutExtension(p.Url) + Path.GetExtension(p.Url);
+                }
+            }
+            return product;
+        }
+        [HttpGet]
         public List<ProductViewModel> GetProducts()
         {
             var product = _productRepo.GetProducts();
@@ -30,6 +43,25 @@ namespace FindYourFoundation.Controllers
             {
                 foreach (var p in product)
                 {
+                    p.Url = "/ProductPic/" + Path.GetFileNameWithoutExtension(p.Url) + Path.GetExtension(p.Url);
+                }
+            }
+            return product;
+        }
+        [HttpGet]
+        public List<ProductViewModel> GetProductsDescByAcc()
+        {
+            var jwtObject = GetjwtToken();
+            var product = _productRepo.GetProductsDesc();
+            if (product != null)
+            {
+                foreach (var p in product)
+                {
+                    var favorite = _productRepo.CheckFavorite(jwtObject["Account"].ToString(),p.Product_Id);
+                    if (favorite != null)
+                    {
+                        p.isFavorite = true;
+                    }
                     p.Url = "/ProductPic/" + Path.GetFileNameWithoutExtension(p.Url) + Path.GetExtension(p.Url);
                 }
             }
@@ -44,7 +76,7 @@ namespace FindYourFoundation.Controllers
             {
                 foreach (var p in product)
                 {
-                    var favorite = _productRepo.CheckFavorite(jwtObject["Account"].ToString(),p.Product_Id);
+                    var favorite = _productRepo.CheckFavorite(jwtObject["Account"].ToString(), p.Product_Id);
                     if (favorite != null)
                     {
                         p.isFavorite = true;
