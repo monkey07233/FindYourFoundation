@@ -36,6 +36,25 @@ namespace FindYourFoundation.Controllers
             return product;
         }
         [HttpGet]
+        public List<ProductViewModel> GetProductsByAcc()
+        {
+            var jwtObject = GetjwtToken();
+            var product = _productRepo.GetProducts();
+            if (product != null)
+            {
+                foreach (var p in product)
+                {
+                    var favorite = _productRepo.CheckFavorite(jwtObject["Account"].ToString(),p.Product_Id);
+                    if (favorite != null)
+                    {
+                        p.isFavorite = true;
+                    }
+                    p.Url = "/ProductPic/" + Path.GetFileNameWithoutExtension(p.Url) + Path.GetExtension(p.Url);
+                }
+            }
+            return product;
+        }
+        [HttpPost]
         public ProductViewModel GetProductById(Product product)
         {
             return _productRepo.GetProductById(product.Product_Id);
