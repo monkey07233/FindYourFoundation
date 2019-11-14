@@ -24,7 +24,7 @@ namespace FindYourFoundation.Services
                 if (c.Birthday.Month == NowMonth)
                 {
                     int? result = _couponRepo.GetCouponByAcc(c.Account, 1);
-                    if (result != null)
+                    if (result == null)
                     {
                         _couponRepo.AddBirthdayCoupon(c.Account);
                     }                   
@@ -39,7 +39,7 @@ namespace FindYourFoundation.Services
                 foreach (var c in customer)
                 {
                     int? result = _couponRepo.GetCouponByAcc(c.Account, 2);
-                    if (result != null)
+                    if (result == null)
                     {
                         _couponRepo.AddAnniversaryCoupon(c.Account);
                     }                      
