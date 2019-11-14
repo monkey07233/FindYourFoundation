@@ -134,7 +134,7 @@ namespace FindYourFoundation.Controllers
             return _productRepo.CancelFavorite(jwtObject["Account"].ToString(), product.Product_Id);
         }
         [HttpGet]
-        public List<BuyHistory> GetBuyHistories()
+        public List<BuyHistoryViewModel> GetBuyHistories()
         {
             var jwtObject = GetjwtToken();
             return _productRepo.GetBuyHistories(jwtObject["Account"].ToString());
