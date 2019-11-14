@@ -12,17 +12,8 @@ namespace FindYourFoundation.Services
         private static CouponRepo _couponRepo = new CouponRepo();
         public void Execute(IJobExecutionContext context)
         {
-            test();
-            //AutoSendBirthdayCoupon();
-            //AutoSendAnniversaryCoupon();
-        }
-        private static void test()
-        {
-            var customer = new CustomerRepo().GetCustomers();
-            foreach (var c in customer)
-            {
-                _couponRepo.AddBirthdayCoupon(c.Account);
-            }
+            AutoSendBirthdayCoupon();
+            AutoSendAnniversaryCoupon();
         }
         private static void AutoSendBirthdayCoupon()
         {
@@ -32,7 +23,11 @@ namespace FindYourFoundation.Services
             {
                 if (c.Birthday.Month == NowMonth)
                 {
-                    _couponRepo.AddBirthdayCoupon(c.Account);
+                    int? result = _couponRepo.GetCouponByAcc(c.Account, 1);
+                    if (result != null)
+                    {
+                        _couponRepo.AddBirthdayCoupon(c.Account);
+                    }                   
                 }
             }
         }
@@ -43,7 +38,11 @@ namespace FindYourFoundation.Services
             {
                 foreach (var c in customer)
                 {
-                    _couponRepo.AddAnniversaryCoupon(c.Account);
+                    int? result = _couponRepo.GetCouponByAcc(c.Account, 2);
+                    if (result != null)
+                    {
+                        _couponRepo.AddAnniversaryCoupon(c.Account);
+                    }                      
                 }
             }           
         }
