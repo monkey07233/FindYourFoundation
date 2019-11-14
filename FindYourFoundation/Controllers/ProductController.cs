@@ -57,7 +57,7 @@ namespace FindYourFoundation.Controllers
             {
                 foreach (var p in product)
                 {
-                    var favorite = _productRepo.CheckFavorite(jwtObject["Account"].ToString(),p.Product_Id);
+                    var favorite = _productRepo.CheckFavorite(jwtObject["Account"].ToString(), p.Product_Id);
                     if (favorite != null)
                     {
                         p.isFavorite = true;
@@ -95,14 +95,14 @@ namespace FindYourFoundation.Controllers
         public string AddProduct()
         {
             Product product = new Product();
-            product.Brand= HttpContext.Current.Request.Params["Brand"];
+            product.Brand = HttpContext.Current.Request.Params["Brand"];
             product.Name = HttpContext.Current.Request.Params["Name"];
             product.Color = HttpContext.Current.Request.Params["Color"];
             product.Ticket = HttpContext.Current.Request.Params["Ticket"];
             product.Info = HttpContext.Current.Request.Params["Info"];
             product.Original_price = Convert.ToInt32(HttpContext.Current.Request.Params["Original_price"]);
-            string PicResult=InsertProductPic();
-            if(PicResult== "上傳圖片成功")
+            string PicResult = InsertProductPic();
+            if (PicResult == "上傳圖片成功")
             {
                 return _productRepo.AddProduct(product);
             }
@@ -132,6 +132,12 @@ namespace FindYourFoundation.Controllers
         {
             var jwtObject = GetjwtToken();
             return _productRepo.CancelFavorite(jwtObject["Account"].ToString(), product.Product_Id);
+        }
+        [HttpGet]
+        public List<BuyHistory> GetBuyHistories()
+        {
+            var jwtObject = GetjwtToken();
+            return _productRepo.GetBuyHistories(jwtObject["Account"].ToString());
         }
         public string InsertProductPic()
         {

@@ -118,5 +118,9 @@ namespace FindYourFoundation.Repositoires
         {
             Execute(@"update Product set Cheapest_price = @price where Name = @name", new { price,name });
         }
+        public List<BuyHistory> GetBuyHistories (string Account)
+        {
+            return Query<BuyHistory>("select a.BuyHistory_Id,b.Brand,b.[Name],a.Price,a.Quantity,a.BuyTime from BuyHistory as a,Product as b where a.Product_Id = b.Product_Id and Account = @Account", new { Account }).ToList();
+        }
     }
 }
