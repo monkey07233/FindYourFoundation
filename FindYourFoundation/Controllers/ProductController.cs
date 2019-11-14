@@ -95,6 +95,12 @@ namespace FindYourFoundation.Controllers
             var jwtObject = GetjwtToken();
             return _productService.AddFavorite(jwtObject["Account"].ToString(), product.Product_Id);
         }
+        [HttpPost]
+        public string CancelFavorite(Product product)
+        {
+            var jwtObject = GetjwtToken();
+            return _productRepo.CancelFavorite(jwtObject["Account"].ToString(), product.Product_Id);
+        }
         public string InsertProductPic()
         {
             var HttpRequest = HttpContext.Current.Request;

@@ -93,6 +93,23 @@ namespace FindYourFoundation.Repositoires
                 return e.ToString();
             }
         }
+        public string CancelFavorite(string Account,int Product_Id)
+        {
+            try
+            {
+                Execute(@"delete from Favorite where Account = @Account and Product_Id = @Product_Id",
+                        new
+                        {
+                            Account = Account,
+                            Product_Id = Product_Id
+                        });
+                return "移除最愛成功";
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
         public void UpdatePrice(string name,int price)
         {
             Execute(@"update Product set Cheapest_price = @price where Name = @name", new { price,name });
