@@ -213,6 +213,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\CouponController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -250,6 +251,7 @@
     <Compile Include="Services\ProductService.cs" />
     <Compile Include="Services\UserPicService.cs" />
     <Compile Include="ViewModels\CartViewModel.cs" />
+    <Compile Include="ViewModels\CouponViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\PasswordViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
@@ -321,6 +323,7 @@
     <Folder Include="Views\Admin\" />
     <Folder Include="Views\Cart\" />
     <Folder Include="Views\Contact\" />
+    <Folder Include="Views\Coupon\" />
     <Folder Include="Views\Customer\" />
   </ItemGroup>
   <ItemGroup>
