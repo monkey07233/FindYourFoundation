@@ -39,7 +39,7 @@ namespace FindYourFoundation.Services
 
         public bool WithoutVerifyToken(string requestUri)
         {
-            if (requestUri.EndsWith("/Login") || requestUri.EndsWith("/Register") || requestUri.EndsWith("/GetProducts") || requestUri.EndsWith("/AddContact") || requestUri.EndsWith("/GetCheapPrice"))
+            if (requestUri.EndsWith("/Login") || requestUri.EndsWith("/Register") || requestUri.EndsWith("/GetProducts") || requestUri.EndsWith("/GetProductsDesc") || requestUri.EndsWith("/AddContact") || requestUri.EndsWith("/GetCheapPrice"))
             {
                 return true;
             }
