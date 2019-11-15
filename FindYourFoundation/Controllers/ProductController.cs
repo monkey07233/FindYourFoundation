@@ -49,6 +49,19 @@ namespace FindYourFoundation.Controllers
             return product;
         }
         [HttpGet]
+        public List<ProductViewModel> SearchProduct(string search)
+        {
+            var product = _productRepo.SearchProduct(search);
+            if (product != null)
+            {
+                foreach (var p in product)
+                {
+                    p.Url = "/ProductPic/" + Path.GetFileNameWithoutExtension(p.Url) + Path.GetExtension(p.Url);
+                }
+            }
+            return product;
+        }
+        [HttpGet]
         public List<ProductViewModel> GetProductsDescByAcc()
         {
             var jwtObject = GetjwtToken();
@@ -72,6 +85,25 @@ namespace FindYourFoundation.Controllers
         {
             var jwtObject = GetjwtToken();
             var product = _productRepo.GetProducts();
+            if (product != null)
+            {
+                foreach (var p in product)
+                {
+                    var favorite = _productRepo.CheckFavorite(jwtObject["Account"].ToString(), p.Product_Id);
+                    if (favorite != null)
+                    {
+                        p.isFavorite = true;
+                    }
+                    p.Url = "/ProductPic/" + Path.GetFileNameWithoutExtension(p.Url) + Path.GetExtension(p.Url);
+                }
+            }
+            return product;
+        }
+        [HttpGet]
+        public List<ProductViewModel> SearchProByAcc(string search)
+        {
+            var jwtObject = GetjwtToken();
+            var product = _productRepo.SearchProduct(search);
             if (product != null)
             {
                 foreach (var p in product)
@@ -185,11 +217,11 @@ namespace FindYourFoundation.Controllers
                 foreach (var Shop in ShopList)
                 {
                     var parity = new Parity();
-                    var price = await new DataMiningService().GetPrice(Name,Shop);
+                    var price = await new DataMiningService().GetPrice(Name, Shop);
                     parity.ProductName = Name;
                     parity.ShopName = Shop;
                     parity.Price = price;
-                    ParityList.Add(parity);                    
+                    ParityList.Add(parity);
                 }
             }
             var cheapPrice =
@@ -201,7 +233,7 @@ namespace FindYourFoundation.Controllers
                     Name = parityGroup.Key,
                     Price = parityGroup.Min(p => p.Price),
                 };
-            foreach(var list in cheapPrice)
+            foreach (var list in cheapPrice)
             {
                 _productRepo.UpdatePrice(list.Name, list.Price);
             }

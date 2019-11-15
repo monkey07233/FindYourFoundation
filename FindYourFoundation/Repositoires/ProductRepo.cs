@@ -17,6 +17,10 @@ namespace FindYourFoundation.Repositoires
         {
             return Query<ProductViewModel>("select a.Product_Id,a.Brand,a.Name,a.Info,a.Original_price,a.Cheapest_price,a.IsOut,b.[Url] from Product as a,ProductPic as b where a.Product_Id = b.Product_Id and a.IsOut = 0 order by a.Cheapest_price").ToList();
         }
+        public List<ProductViewModel> SearchProduct(string search)
+        {
+            return Query<ProductViewModel>("select a.Product_Id,a.Brand,a.Name,a.Info,a.Original_price,a.Cheapest_price,a.IsOut,b.[Url] from Product as a,ProductPic as b where a.Product_Id = b.Product_Id and a.IsOut = 0 and (a.Brand like '%" + @search + "' or a.[Name] like '%" + @search + "%') order by a.Cheapest_price desc",new { search }).ToList();
+        }
         public List<Product> GetProductsForAdmin()
         {
             return Query<Product>("select * from Product").ToList();
