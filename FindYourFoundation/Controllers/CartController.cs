@@ -40,6 +40,13 @@ namespace FindYourFoundation.Controllers
             return _cartService.AddToCart(jwtObject["Account"].ToString(), cart.Product_Id);
         }
         [HttpPost]
+        public string DeleteCart(CartViewModel cart)
+        {
+            var jwtObject = GetjwtToken();
+           _cartService.DeleteCart(jwtObject["Account"].ToString());
+            return "刪除成功";
+        }
+        [HttpPost]
         public string DeleteCartById(CartViewModel cart)
         {
             var jwtObject = GetjwtToken();
