@@ -15,5 +15,6 @@ namespace FindYourFoundation.Models
         public string Info { get; set; }
         public int Original_price { get; set; }
         public int Cheapest_price { get; set; }
+        public int IsOut { get; set; }
     }
 }

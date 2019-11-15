@@ -11,15 +11,15 @@ namespace FindYourFoundation.Repositoires
     {
         public List<ProductViewModel> GetProductsDesc()
         {
-            return Query<ProductViewModel>("select a.Product_Id,a.Brand,a.Name,a.Info,a.Original_price,a.Cheapest_price,b.[Url] from Product as a,ProductPic as b where a.Product_Id = b.Product_Id and a.IsOut = 0 order by a.Cheapest_price desc").ToList();
+            return Query<ProductViewModel>("select a.Product_Id,a.Brand,a.Name,a.Info,a.Original_price,a.Cheapest_price,a.IsOut,b.[Url] from Product as a,ProductPic as b where a.Product_Id = b.Product_Id and a.IsOut = 0 order by a.Cheapest_price desc").ToList();
         }
         public List<ProductViewModel> GetProducts()
         {
-            return Query<ProductViewModel>("select a.Product_Id,a.Brand,a.Name,a.Info,a.Original_price,a.Cheapest_price,b.[Url] from Product as a,ProductPic as b where a.Product_Id = b.Product_Id and a.IsOut = 0 order by a.Cheapest_price").ToList();
+            return Query<ProductViewModel>("select a.Product_Id,a.Brand,a.Name,a.Info,a.Original_price,a.Cheapest_price,a.IsOut,b.[Url] from Product as a,ProductPic as b where a.Product_Id = b.Product_Id and a.IsOut = 0 order by a.Cheapest_price").ToList();
         }
         public List<Product> GetProductsForAdmin()
         {
-            return Query<Product>("select * from Product where IsOut = 0").ToList();
+            return Query<Product>("select * from Product").ToList();
             //return Query<Product>("select * from Product where IsOut = 0 order by Cheapest_price desc").ToList();
         }
         public List<string> GetProductName()
@@ -70,6 +70,18 @@ namespace FindYourFoundation.Repositoires
                 Execute("update Product set IsOut=1 where Product_Id=@Product_Id",new { Product_Id });
                 return "修改成功";
             }catch(Exception e)
+            {
+                return e.ToString();
+            }
+        }
+        public string CancelOutProduct(int Product_Id)
+        {
+            try
+            {
+                Execute("update Product set IsOut=0 where Product_Id=@Product_Id", new { Product_Id });
+                return "修改成功";
+            }
+            catch (Exception e)
             {
                 return e.ToString();
             }
