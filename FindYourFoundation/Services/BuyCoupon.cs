@@ -22,31 +22,31 @@ namespace FindYourFoundation.Services
             foreach(var c in customer)
             {
                 var times = _buyHistoryRepo.GetBuyTimes(c.Account);
-                if (times>=1 && _couponRepo.GetCouponByAcc(c.Account, 3) == null)
+                if (times>=1 && _couponRepo.GetCouponByAcc(c.Account, 3) == 0)
                 {
                     _couponRepo.AddBuyTimesCoupon(c.Account,3);
                 }
-                if (times >= 5 && _couponRepo.GetCouponByAcc(c.Account, 4) == null)
+                if (times >= 5 && _couponRepo.GetCouponByAcc(c.Account, 4) == 0)
                 {
                     _couponRepo.AddBuyTimesCoupon(c.Account,4);
                 }
-                if (times >= 10 && _couponRepo.GetCouponByAcc(c.Account, 5) == null)
+                if (times >= 10 && _couponRepo.GetCouponByAcc(c.Account, 5) == 0)
                 {
                     _couponRepo.AddBuyTimesCoupon(c.Account,5);
                 }
-                if (times >= 15 && _couponRepo.GetCouponByAcc(c.Account, 6) == null)
+                if (times >= 15 && _couponRepo.GetCouponByAcc(c.Account, 6) == 0)
                 {
                     _couponRepo.AddBuyTimesCoupon(c.Account,6);
                 }
-                if (times >= 20 && _couponRepo.GetCouponByAcc(c.Account, 7) == null)
+                if (times >= 20 && _couponRepo.GetCouponByAcc(c.Account, 7) == 0)
                 {
                     _couponRepo.AddBuyTimesCoupon(c.Account,7);
                 }
-                if (times >= 25 && _couponRepo.GetCouponByAcc(c.Account, 8) == null)
+                if (times >= 25 && _couponRepo.GetCouponByAcc(c.Account, 8) == 0)
                 {
                     _couponRepo.AddBuyTimesCoupon(c.Account,8);
                 }
-                if (times >= 30 && _couponRepo.GetCouponByAcc(c.Account, 9) == null)
+                if (times >= 30 && _couponRepo.GetCouponByAcc(c.Account, 9) == 0)
                 {
                     _couponRepo.AddBuyTimesCoupon(c.Account,9);
                 }

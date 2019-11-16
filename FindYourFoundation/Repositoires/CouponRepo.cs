@@ -44,7 +44,7 @@ namespace FindYourFoundation.Repositoires
                         ExpiryTime = DateTime.Now.AddMonths(1)
                     });
         }
-        public int? GetCouponByAcc(string acc,int type)
+        public int GetCouponByAcc(string acc,int type)
         {
             return Query<int>("select CouponRecord_Id from CouponRecord where Account = @Account and Type = @Type", new { Account = acc, Type = type }).FirstOrDefault();
         }
