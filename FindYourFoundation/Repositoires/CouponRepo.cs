@@ -32,7 +32,19 @@ namespace FindYourFoundation.Repositoires
                         ExpiryTime= DateTime.Now.AddMonths(1)
                     });
         }
-        public int GetCouponByAcc(string acc,int type)
+        public void AddBuyTimesCoupon(string account,int type)
+        {
+            Execute(@"insert into CouponRecord(Account,Type,CouponTime,ExpiryTime)
+                    values(@Account,@Type,@CouponTime)",
+                    new
+                    {
+                        Account = account,
+                        Type = type,
+                        CouponTime = DateTime.Now,
+                        ExpiryTime = DateTime.Now.AddMonths(1)
+                    });
+        }
+        public int? GetCouponByAcc(string acc,int type)
         {
             return Query<int>("select CouponRecord_Id from CouponRecord where Account = @Account and Type = @Type", new { Account = acc, Type = type }).FirstOrDefault();
         }

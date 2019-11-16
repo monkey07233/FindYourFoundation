@@ -23,9 +23,15 @@ namespace FindYourFoundation.Services
                                 .WithIdentity("monthCouponTrigger")
                                 .Build();
 
+                IJobDetail buyCouponJob = JobBuilder.Create<BuyCoupon>().WithIdentity("BuyCoupon").Build();
 
+                ITrigger buyCouponTrigger = TriggerBuilder.Create()
+                                .WithCronSchedule("0 0/5 * * * ?")
+                                .WithIdentity("buyCouponTrigger")
+                                .Build();
 
                 scheduler.ScheduleJob(monthCouponJob, monthCouponTrigger);
+                scheduler.ScheduleJob(buyCouponJob, buyCouponTrigger);
                 scheduler.Start();
             }
         }
