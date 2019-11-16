@@ -48,6 +48,32 @@ namespace FindYourFoundation.Controllers
             }
             return product;
         }
+        [HttpGet]
+        public List<ProductViewModel> GetProductsHot()
+        {
+            var product = _productRepo.GetProductsHot();
+            if (product != null)
+            {
+                foreach (var p in product)
+                {
+                    p.Url = "/ProductPic/" + Path.GetFileNameWithoutExtension(p.Url) + Path.GetExtension(p.Url);
+                }
+            }
+            return product;
+        }
+        [HttpGet]
+        public List<ProductViewModel> GetProductsHotTop3()
+        {
+            var product = _productRepo.GetProductsHotTop3();
+            if (product != null)
+            {
+                foreach (var p in product)
+                {
+                    p.Url = "/ProductPic/" + Path.GetFileNameWithoutExtension(p.Url) + Path.GetExtension(p.Url);
+                }
+            }
+            return product;
+        }
         [HttpPost]
         public List<ProductViewModel> SearchProduct(string search)
         {
@@ -85,6 +111,25 @@ namespace FindYourFoundation.Controllers
         {
             var jwtObject = GetjwtToken();
             var product = _productRepo.GetProducts();
+            if (product != null)
+            {
+                foreach (var p in product)
+                {
+                    var favorite = _productRepo.CheckFavorite(jwtObject["Account"].ToString(), p.Product_Id);
+                    if (favorite != null)
+                    {
+                        p.isFavorite = true;
+                    }
+                    p.Url = "/ProductPic/" + Path.GetFileNameWithoutExtension(p.Url) + Path.GetExtension(p.Url);
+                }
+            }
+            return product;
+        }
+        [HttpGet]
+        public List<ProductViewModel> GetProductsHotByAcc()
+        {
+            var jwtObject = GetjwtToken();
+            var product = _productRepo.GetProductsHot();
             if (product != null)
             {
                 foreach (var p in product)

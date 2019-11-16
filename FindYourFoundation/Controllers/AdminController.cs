@@ -15,9 +15,19 @@ namespace FindYourFoundation.Controllers
         private CustomerRepo _customerRepo = new CustomerRepo();
         // GET: Admin
         [HttpGet]
+        public List<Product> GetProductsDescForAdmin()
+        {
+            return _productRepo.GetProductsDescForAdmin();
+        }
+        [HttpGet]
         public List<Product> GetProductsForAdmin()
         {
             return _productRepo.GetProductsForAdmin();
+        }
+        [HttpGet]
+        public List<Product> GetProductsHotForAdmin()
+        {
+            return _productRepo.GetProductsHotForAdmin();
         }
         [HttpGet]
         public List<Customer> GetCustomers()
