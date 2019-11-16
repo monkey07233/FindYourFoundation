@@ -8,6 +8,7 @@ namespace FindYourFoundation.ViewModels
     public class BuyHistoryViewModel
     {
         public int BuyHistory_Id { get; set; }
+        public int Product_Id { get; set; }
         public string Brand { get; set; }
         public string Name { get; set; }
         public int Quantity { get; set; }

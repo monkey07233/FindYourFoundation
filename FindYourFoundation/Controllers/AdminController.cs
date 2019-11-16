@@ -1,5 +1,6 @@
 ﻿using FindYourFoundation.Models;
 using FindYourFoundation.Repositoires;
+using FindYourFoundation.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +43,11 @@ namespace FindYourFoundation.Controllers
         public string DeleteBlackList(Customer customer)
         {
             return _customerRepo.DeleteBlackList(customer);
+        }
+        [HttpGet]
+        public List<BuyHistoryViewModel> GetBuyHistoryByAcc(Customer customer)
+        {
+            return new BuyHistoryRepo().GetBuyHistories(customer.Account);
         }
     }
 }
