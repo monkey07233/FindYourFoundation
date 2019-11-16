@@ -154,6 +154,11 @@ namespace FindYourFoundation.Controllers
             return _productRepo.OutProduct(product.Product_Id);
         }
         [HttpPost]
+        public string CancelOutProduct(Product product)
+        {
+            return _productRepo.CancelOutProduct(product.Product_Id);
+        }
+        [HttpPost]
         public string AddFavorite(Product product)
         {
             var jwtObject = GetjwtToken();
