@@ -12,7 +12,7 @@ namespace FindYourFoundation.Repositoires
         public void AddBirthdayCoupon(string account)
         {
             Execute(@"insert into CouponRecord(Account,Type,CouponTime,ExpiryTime)
-                    values(@Account,@Type,@CouponTime)",
+                    values(@Account,@Type,@CouponTime,@ExpiryTime)",
                     new {
                         Account=account,
                         Type=1,
@@ -23,7 +23,7 @@ namespace FindYourFoundation.Repositoires
         public void AddAnniversaryCoupon(string account)
         {
             Execute(@"insert into CouponRecord(Account,Type,CouponTime,ExpiryTime)
-                    values(@Account,@Type,@CouponTime)",
+                    values(@Account,@Type,@CouponTime,@ExpiryTime)",
                     new
                     {
                         Account = account,
@@ -35,7 +35,7 @@ namespace FindYourFoundation.Repositoires
         public void AddBuyTimesCoupon(string account,int type)
         {
             Execute(@"insert into CouponRecord(Account,Type,CouponTime,ExpiryTime)
-                    values(@Account,@Type,@CouponTime)",
+                    values(@Account,@Type,@CouponTime,@ExpiryTime)",
                     new
                     {
                         Account = account,
