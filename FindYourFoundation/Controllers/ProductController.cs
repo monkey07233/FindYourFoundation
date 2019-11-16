@@ -48,7 +48,7 @@ namespace FindYourFoundation.Controllers
             }
             return product;
         }
-        [HttpGet]
+        [HttpPost]
         public List<ProductViewModel> SearchProduct(string search)
         {
             var product = _productRepo.SearchProduct(search);
@@ -99,7 +99,7 @@ namespace FindYourFoundation.Controllers
             }
             return product;
         }
-        [HttpGet]
+        [HttpPost]
         public List<ProductViewModel> SearchProByAcc(string search)
         {
             var jwtObject = GetjwtToken();
