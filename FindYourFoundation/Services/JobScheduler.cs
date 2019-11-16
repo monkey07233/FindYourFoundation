@@ -23,6 +23,8 @@ namespace FindYourFoundation.Services
                                 .WithIdentity("monthCouponTrigger")
                                 .Build();
 
+                IScheduler scheduler2 = new StdSchedulerFactory().GetScheduler();
+
                 IJobDetail buyCouponJob = JobBuilder.Create<BuyCoupon>().WithIdentity("BuyCoupon").Build();
 
                 ITrigger buyCouponTrigger = TriggerBuilder.Create()
@@ -31,8 +33,9 @@ namespace FindYourFoundation.Services
                                 .Build();
 
                 scheduler.ScheduleJob(monthCouponJob, monthCouponTrigger);
-                scheduler.ScheduleJob(buyCouponJob, buyCouponTrigger);
+                scheduler2.ScheduleJob(buyCouponJob, buyCouponTrigger);
                 scheduler.Start();
+                scheduler2.Start();
             }
         }
     }
