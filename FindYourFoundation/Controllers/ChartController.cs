@@ -11,7 +11,6 @@ namespace FindYourFoundation.Controllers
 {
     public class ChartController : ApiController
     {
-        private ChartService _chartService = new ChartService();
         private ChartRepo _chartRepo = new ChartRepo();
         // GET: Chart
         [HttpGet]
@@ -29,7 +28,11 @@ namespace FindYourFoundation.Controllers
             }
             return brandHistories;
         }
-
+        [HttpGet]
+        public List<GetGender> GetGender()
+        {
+            return _chartRepo.GetGender();
+        }
         public class BrandHistory
         {
             public string genre { get; set; }

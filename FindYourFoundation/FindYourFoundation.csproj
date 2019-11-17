@@ -244,7 +244,6 @@
     <Compile Include="Repositoires\ProductPicRepo.cs" />
     <Compile Include="Repositoires\ProductRepo.cs" />
     <Compile Include="Repositoires\UserPicRepo.cs" />
-    <Compile Include="Services\ChartService.cs" />
     <Compile Include="Services\MonthCoupon.cs" />
     <Compile Include="Services\BuyCoupon.cs" />
     <Compile Include="Services\CartService.cs" />
@@ -257,7 +256,6 @@
     <Compile Include="Services\UserPicService.cs" />
     <Compile Include="ViewModels\BuyHistoryViewModel.cs" />
     <Compile Include="ViewModels\CartViewModel.cs" />
-    <Compile Include="ViewModels\ChartViewModel.cs" />
     <Compile Include="ViewModels\CouponViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\PasswordViewModel.cs" />
