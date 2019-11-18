@@ -10,6 +10,7 @@ namespace FindYourFoundation.ViewModels
         public int CouponRecord_Id { get; set; }
         public string Name { get; set; }
         public int Coupon_price { get; set; }
+        public string IsUse { get; set; }
         public DateTime ExpiryTime { get; set; }
     }
 }

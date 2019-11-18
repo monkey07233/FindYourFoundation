@@ -50,11 +50,11 @@ namespace FindYourFoundation.Repositoires
         }
         public void UseCoupon(int CouponRecord_Id)
         {
-            Execute("update CouponRecord set IsUse = 1 where CouponRecord_Id = @CouponRecord_Id", new { CouponRecord_Id });
+            Execute("update CouponRecord set IsUse = 'Y' where CouponRecord_Id = @CouponRecord_Id", new { CouponRecord_Id });
         }
         public List<CouponViewModel> GetCoupons(string Account)
         {
-            return Query<CouponViewModel>("select b.CouponRecord_Id,a.[Name],a.Coupon_price,b.ExpiryTime from Coupon as a,CouponRecord as b where a.Coupon_Id = b.[Type] and Account = @Account", new { Account }).ToList();
+            return Query<CouponViewModel>("select b.CouponRecord_Id,a.[Name],a.Coupon_price,b.IsUse,b.ExpiryTime from Coupon as a,CouponRecord as b where a.Coupon_Id = b.[Type] and Account = @Account", new { Account }).ToList();
         }
     }
 }
