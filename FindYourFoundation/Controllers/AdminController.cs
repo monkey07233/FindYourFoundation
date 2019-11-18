@@ -54,7 +54,7 @@ namespace FindYourFoundation.Controllers
         {
             return _customerRepo.DeleteBlackList(customer);
         }
-        [HttpGet]
+        [HttpPost]
         public List<BuyHistoryViewModel> GetBuyHistoryByAcc(Customer customer)
         {
             return new BuyHistoryRepo().GetBuyHistories(customer.Account);
