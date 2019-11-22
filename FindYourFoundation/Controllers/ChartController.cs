@@ -32,7 +32,7 @@ namespace FindYourFoundation.Controllers
             return brandHistories;
         }
         [HttpGet]
-        public List<GetGender> GetGender()
+        public List<PieChart> GetGender()
         {
             return _chartRepo.GetGender();
         }
@@ -156,6 +156,12 @@ namespace FindYourFoundation.Controllers
                 dateList.Add(getbuy);
             }
             return dateList;
+        }
+        [HttpGet]
+        public List<PieChart> GetBuyBrand()
+        {
+            var jwtObject = GetjwtToken();
+            return _chartRepo.GetBuyBrand(jwtObject["Account"].ToString());
         }
         public Dictionary<string, object> GetjwtToken()
         {

@@ -15,9 +15,9 @@ namespace FindYourFoundation.Repositoires
                                         on a.Product_Id = b.Product_Id
                                         order by b.times desc").ToList();
         }
-        public List<GetGender> GetGender()
+        public List<PieChart> GetGender()
         {
-            return Query<GetGender>("select count(Gender) as value,Gender as label from Customer group by Gender").ToList();
+            return Query<PieChart>("select count(Gender) as value,Gender as label from Customer group by Gender").ToList();
         }
         public GetAge GetAge()
         {
@@ -32,13 +32,17 @@ namespace FindYourFoundation.Repositoires
         {
             return Query<DateTime>("select convert(varchar, BuyTime, 120) as [Date] from BuyHistory where Account=@Account group by convert(varchar, BuyTime, 120) order by [Date]", new { Account }).ToList();
         }
+        public List<PieChart> GetBuyBrand(string Account)
+        {
+            return Query<PieChart>("select sum(Quantity) as [value],b.Brand as [label] from BuyHistory as a,Product as b where a.Product_Id = b.Product_Id and a.Account=@Account group by b.Brand", new { Account }).ToList();
+        }
     }
     public class GetBrandHistory
     {
         public string Brand { get; set; }
         public int times { get; set; }
     }
-    public class GetGender
+    public class PieChart
     {
         public string label { get; set; }
         public int value { get; set; }
