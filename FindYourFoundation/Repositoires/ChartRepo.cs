@@ -28,6 +28,10 @@ namespace FindYourFoundation.Repositoires
                                     sum(case when year(getdate())-year(Birthday) >50 then 1 else 0 end) as overFive
                                     from Customer").FirstOrDefault();
         }
+        public List<DateTime> GetBuyFrequency(string Account)
+        {
+            return Query<DateTime>("select convert(varchar, BuyTime, 120) as [Date] from BuyHistory where Account=@Account group by convert(varchar, BuyTime, 120) order by [Date]", new { Account }).ToList();
+        }
     }
     public class GetBrandHistory
     {
