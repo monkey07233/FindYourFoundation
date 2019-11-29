@@ -7,7 +7,7 @@ using System.Web;
 
 namespace FindYourFoundation.Repositoires
 {
-    public class ProductRepo:DataAccessLayer
+    public class ProductRepo : DataAccessLayer
     {
         public List<ProductViewModel> GetProductsDesc()
         {
@@ -35,7 +35,7 @@ namespace FindYourFoundation.Repositoires
         }
         public List<ProductViewModel> SearchProduct(string search)
         {
-            return Query<ProductViewModel>("select a.Product_Id,a.Brand,a.Name,a.Info,a.Original_price,a.Cheapest_price,a.IsOut,b.[Url] from Product as a,ProductPic as b where a.Product_Id = b.Product_Id and a.IsOut = 0 and (a.Brand like '%" + @search + "' or a.[Name] like '%" + @search + "%') order by a.Cheapest_price desc",new { search }).ToList();
+            return Query<ProductViewModel>("select a.Product_Id,a.Brand,a.Name,a.Info,a.Original_price,a.Cheapest_price,a.IsOut,b.[Url] from Product as a,ProductPic as b where a.Product_Id = b.Product_Id and a.IsOut = 0 and (a.Brand like '%" + @search + "' or a.[Name] like '%" + @search + "%') order by a.Cheapest_price desc", new { search }).ToList();
         }
         public List<Product> GetProductsDescForAdmin()
         {
@@ -59,7 +59,7 @@ namespace FindYourFoundation.Repositoires
         }
         public ProductViewModel GetProductById(int Product_Id)
         {
-            return Query<ProductViewModel>("select a.Product_Id,a.Brand,a.Name,a.Info,a.Original_price,a.Cheapest_price,b.[Url] from Product as a,ProductPic as b where a.Product_Id = b.Product_Id and a.IsOut = 0 and a.Product_Id = @Product_Id",new { Product_Id }).FirstOrDefault();
+            return Query<ProductViewModel>("select a.Product_Id,a.Brand,a.Name,a.Info,a.Original_price,a.Cheapest_price,b.[Url] from Product as a,ProductPic as b where a.Product_Id = b.Product_Id and a.IsOut = 0 and a.Product_Id = @Product_Id", new { Product_Id }).FirstOrDefault();
         }
         public string AddProduct(Product product)
         {
@@ -89,7 +89,8 @@ namespace FindYourFoundation.Repositoires
             {
                 Execute("delete from Product where Product_Id = @Product_Id", new { Product_Id });
                 return "刪除成功";
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 return e.ToString();
             }
@@ -98,9 +99,10 @@ namespace FindYourFoundation.Repositoires
         {
             try
             {
-                Execute("update Product set IsOut=1 where Product_Id=@Product_Id",new { Product_Id });
+                Execute("update Product set IsOut=1 where Product_Id=@Product_Id", new { Product_Id });
                 return "修改成功";
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 return e.ToString();
             }
@@ -140,7 +142,7 @@ namespace FindYourFoundation.Repositoires
                 return e.ToString();
             }
         }
-        public string CancelFavorite(string Account,int Product_Id)
+        public string CancelFavorite(string Account, int Product_Id)
         {
             try
             {
@@ -157,13 +159,21 @@ namespace FindYourFoundation.Repositoires
                 return e.ToString();
             }
         }
-        public void UpdatePrice(string name,int price)
+        public void UpdatePrice(string name, int price)
         {
-            Execute(@"update Product set Cheapest_price = @price where Name = @name", new { price,name });
+            Execute(@"update Product set Cheapest_price = @price where Name = @name", new { price, name });
         }
-        public List<BuyHistoryViewModel> GetBuyHistories (string Account)
+        public List<BuyHistoryViewModel> GetBuyHistories(string Account)
         {
             return Query<BuyHistoryViewModel>("select a.BuyHistory_Id,b.Brand,b.[Name],a.Price,a.Quantity,a.BuyTime from BuyHistory as a,Product as b where a.Product_Id = b.Product_Id and Account = @Account", new { Account }).ToList();
+        }
+        public List<string> GetProTicket()
+        {
+            return Query<string>("select Ticket from Product").ToList();
+        } 
+        public ProductViewModel GetProductByTicket(string ticket)
+        {
+            return Query<ProductViewModel>("select a.Product_Id,a.Brand,a.[Name],a.Ticket,b.[Url] from Product as a,ProductPic as b where a.Product_Id = b.Product_Id and Ticket = @ticket", new { ticket }).FirstOrDefault();
         }
     }
 }

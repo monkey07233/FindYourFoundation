@@ -217,6 +217,7 @@
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\CouponController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\FaceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -229,6 +230,7 @@
     <Compile Include="Models\Coupon.cs" />
     <Compile Include="Models\CouponRecord.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\FaceHistory.cs" />
     <Compile Include="Models\Favorite.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductPic.cs" />
@@ -241,9 +243,11 @@
     <Compile Include="Repositoires\CouponRepo.cs" />
     <Compile Include="Repositoires\CustomerRepo.cs" />
     <Compile Include="Repositoires\DataAccessLayer.cs" />
+    <Compile Include="Repositoires\FaceRepo.cs" />
     <Compile Include="Repositoires\ProductPicRepo.cs" />
     <Compile Include="Repositoires\ProductRepo.cs" />
     <Compile Include="Repositoires\UserPicRepo.cs" />
+    <Compile Include="Services\FaceService.cs" />
     <Compile Include="Services\MonthCoupon.cs" />
     <Compile Include="Services\BuyCoupon.cs" />
     <Compile Include="Services\CartService.cs" />
@@ -257,6 +261,7 @@
     <Compile Include="ViewModels\BuyHistoryViewModel.cs" />
     <Compile Include="ViewModels\CartViewModel.cs" />
     <Compile Include="ViewModels\CouponViewModel.cs" />
+    <Compile Include="ViewModels\FaceViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\PasswordViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
@@ -323,6 +328,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="FacePic\" />
     <Folder Include="ProductPic\" />
     <Folder Include="UserPic\" />
     <Folder Include="Views\Admin\" />
