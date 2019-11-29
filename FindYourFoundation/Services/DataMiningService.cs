@@ -15,6 +15,7 @@ namespace FindYourFoundation.Services
         public static int price = 0;
         public async Task<int> GetPrice(string name,string shop)
         {
+            price = -1;
             string FileName = shop + ".py";
             await RunPython(FileName, "-u", name);
             return price;
