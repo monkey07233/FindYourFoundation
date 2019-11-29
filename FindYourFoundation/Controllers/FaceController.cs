@@ -18,6 +18,7 @@ namespace FindYourFoundation.Controllers
     public class FaceController : ApiController
     {
         private FaceService _faceService = new FaceService();
+        private FaceRepo _faceRepo = new FaceRepo();
         private string secret = "FindYourFoundation";
         [HttpPost]
         public async Task<FaceViewModel> SkinDetection()
@@ -55,6 +56,21 @@ namespace FindYourFoundation.Controllers
                 }               
             }
             return faceViewModel;
+        }
+        [HttpGet]
+        public List<FaceViewModel> GetFaceHistoryByAcc()
+        {
+            var jwtObject = GetjwtToken();
+            var history = _faceRepo.GetFaceHistoryByAcc(jwtObject["Account"].ToString());
+            if (history != null)
+            {
+                foreach(var face in history)
+                {
+                    face.FaceUrl="/FacePic/"+Path.GetFileNameWithoutExtension(face.FaceUrl) + Path.GetExtension(face.FaceUrl);
+                    face.ProductUrl = "/ProductPic/" + Path.GetFileNameWithoutExtension(face.ProductUrl) + Path.GetExtension(face.ProductUrl);
+                }
+            }
+            return history;
         }
         public Dictionary<string, object> GetjwtToken()
         {
