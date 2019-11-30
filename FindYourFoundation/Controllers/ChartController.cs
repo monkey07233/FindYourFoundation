@@ -32,6 +32,21 @@ namespace FindYourFoundation.Controllers
             return brandHistories;
         }
         [HttpGet]
+        public Web GetBrandHistoryForWeb()
+        {
+            Web brandHistories = new Web();
+            brandHistories.labels = new List<string>();
+            brandHistories.data = new List<int>();
+            var history = _chartRepo.GetBrandHistory();
+            var list = history.GroupBy(h => h.Brand).Select(g => new { Brand = g.Key, times = g.Sum(q => q.times) });
+            foreach (var b_history in list)
+            {
+                brandHistories.labels.Add(b_history.Brand);
+                brandHistories.data.Add(b_history.times);
+            }
+            return brandHistories;
+        }
+        [HttpGet]
         public List<PieChart> GetGender()
         {
             return _chartRepo.GetGender();
@@ -83,7 +98,7 @@ namespace FindYourFoundation.Controllers
             List<Bar> dateList = new List<Bar>();
             foreach (var date in frequency)
             {
-                if(date.Year == year)
+                if (date.Year == year)
                 {
                     if (date.Month == 1)
                     {
@@ -148,7 +163,7 @@ namespace FindYourFoundation.Controllers
             getBuyDic.Add("十月", month[9]);
             getBuyDic.Add("十一月", month[10]);
             getBuyDic.Add("十二月", month[11]);
-            foreach(var buy in getBuyDic)
+            foreach (var buy in getBuyDic)
             {
                 Bar getbuy = new Bar();
                 getbuy.genre = buy.Key;
@@ -174,6 +189,11 @@ namespace FindYourFoundation.Controllers
         {
             public string genre { get; set; }
             public int sold { get; set; }
+        }
+        public class Web
+        {
+            public List<string> labels { get; set; }
+            public List<int> data { get; set; }
         }
     }
 }
