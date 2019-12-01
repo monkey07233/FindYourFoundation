@@ -39,7 +39,7 @@ namespace FindYourFoundation.Services
 
         public bool WithoutVerifyToken(string requestUri)
         {
-            if (requestUri.EndsWith("/Login") || requestUri.EndsWith("/Register") || requestUri.EndsWith("/GetProducts") || requestUri.EndsWith("/GetProductsDesc") || requestUri.EndsWith("/GetProductsHot") || requestUri.EndsWith("/GetProductsHotTop3") || requestUri.EndsWith("/AddContact") || requestUri.EndsWith("/GetCheapPrice") || requestUri.Contains("/SearchProduct") || requestUri.Contains("/GetBrandHistory") || requestUri.Contains("/GetBrandHistoryForWeb") || requestUri.Contains("/GetGender") || requestUri.Contains("/GetAge"))
+            if (requestUri.EndsWith("/Login") || requestUri.EndsWith("/Register") || requestUri.EndsWith("/GetProducts") || requestUri.EndsWith("/GetProductsDesc") || requestUri.EndsWith("/GetProductsHot") || requestUri.EndsWith("/GetProductsHotTop3") || requestUri.EndsWith("/AddContact") || requestUri.EndsWith("/GetCheapPrice") || requestUri.Contains("/SearchProduct") || requestUri.Contains("/GetBrandHistory") || requestUri.Contains("/GetBrandHistoryForWeb") || requestUri.Contains("/GetGender") || requestUri.Contains("/GetGenderForWeb") || requestUri.Contains("/GetAge") || requestUri.Contains("/GetAgeForWeb"))
             {
                 return true;
             }
