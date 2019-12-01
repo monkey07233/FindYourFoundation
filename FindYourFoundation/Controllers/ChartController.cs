@@ -52,6 +52,20 @@ namespace FindYourFoundation.Controllers
             return _chartRepo.GetGender();
         }
         [HttpGet]
+        public Web GetGenderFoeWeb()
+        {
+            Web Gender = new Web();
+            Gender.labels = new List<string>();
+            Gender.data = new List<int>();
+            var gender = _chartRepo.GetGender();
+            foreach(var g in gender)
+            {
+                Gender.labels.Add(g.label);
+                Gender.data.Add(g.value);
+            }
+            return Gender;
+        }
+        [HttpGet]
         public List<Bar> GetAge()
         {
             var age = _chartRepo.GetAge();
@@ -87,6 +101,25 @@ namespace FindYourFoundation.Controllers
                 ageList.Add(getAge);
             }
             return ageList;
+        }
+        [HttpGet]
+        public Web GetAgeForWeb()
+        {
+            Web Age = new Web();
+            Age.labels = new List<string>();
+            Age.data = new List<int>();
+            var age = _chartRepo.GetAge();
+            Age.labels.Add("20歲以下");
+            Age.labels.Add("21歲-30歲");
+            Age.labels.Add("31歲-40歲");
+            Age.labels.Add("41歲-50歲");
+            Age.labels.Add("50歲以上");
+            Age.data.Add(age.underTwenty);
+            Age.data.Add(age.twoTothree);
+            Age.data.Add(age.threeTofour);
+            Age.data.Add(age.fourTofive);
+            Age.data.Add(age.overFive);
+            return Age;
         }
         [HttpGet]
         public List<Bar> GetBuyFrequency()
