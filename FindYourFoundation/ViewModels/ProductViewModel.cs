@@ -11,6 +11,7 @@ namespace FindYourFoundation.ViewModels
         public string Brand { get; set; }
         public string Name { get; set; }
         public string Info { get; set; }
+        public string Ticket { get; set; }
         public string Color { get; set; }
         public int Original_price { get; set; }
         public int Cheapest_price { get; set; }
