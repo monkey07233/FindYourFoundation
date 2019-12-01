@@ -50,7 +50,7 @@ namespace FindYourFoundation.Controllers
                         faceViewModel.Brand = product.Brand;
                         faceViewModel.Name = product.Name;
                         faceViewModel.Ticket = product.Ticket;
-                        faceViewModel.ProductUrl= "/ProductPic/" + Path.GetFileNameWithoutExtension(product.Url) + Path.GetExtension(Url);
+                        faceViewModel.ProductUrl= "/ProductPic/" + Path.GetFileNameWithoutExtension(product.Url) + Path.GetExtension(product.Url);
                         faceViewModel.FaceDate = DateTime.Now;
                         new FaceRepo().AddFaceHistory(Url, faceViewModel);
                     }
