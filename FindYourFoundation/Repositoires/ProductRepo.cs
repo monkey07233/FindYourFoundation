@@ -28,7 +28,7 @@ namespace FindYourFoundation.Repositoires
         public List<ProductViewModel> GetProductsHotTop3()
         {
             return Query<ProductViewModel>(@"select top 3 a.Product_Id,a.Brand,a.[Name],a.Color,a.Original_price,a.Cheapest_price,a.IsOut,a.[Url],b.times
-                                            from (select p.Product_Id,p.Brand,p.[Name],p.Original_price,p.Cheapest_price,p.IsOut,ProductPic.[Url] from Product as p,ProductPic where p.Product_Id = ProductPic.Product_Id and p.IsOut = 0) as a
+                                            from (select p.Product_Id,p.Brand,p.[Name],p.Color,p.Original_price,p.Cheapest_price,p.IsOut,ProductPic.[Url] from Product as p,ProductPic where p.Product_Id = ProductPic.Product_Id and p.IsOut = 0) as a
                                             left join (select Product_Id,sum(Quantity) as times from BuyHistory group by Product_Id ) as b
                                             on a.Product_Id = b.Product_Id
                                             order by b.times desc").ToList();
