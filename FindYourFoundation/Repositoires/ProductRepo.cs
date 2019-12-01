@@ -11,15 +11,15 @@ namespace FindYourFoundation.Repositoires
     {
         public List<ProductViewModel> GetProductsDesc()
         {
-            return Query<ProductViewModel>("select a.Product_Id,a.Brand,a.Name,a.Info,a.Original_price,a.Cheapest_price,a.IsOut,b.[Url] from Product as a,ProductPic as b where a.Product_Id = b.Product_Id and a.IsOut = 0 order by a.Cheapest_price desc").ToList();
+            return Query<ProductViewModel>("select a.Product_Id,a.Brand,a.Name,a.Color,a.Info,a.Original_price,a.Cheapest_price,a.IsOut,b.[Url] from Product as a,ProductPic as b where a.Product_Id = b.Product_Id and a.IsOut = 0 order by a.Cheapest_price desc").ToList();
         }
         public List<ProductViewModel> GetProducts()
         {
-            return Query<ProductViewModel>("select a.Product_Id,a.Brand,a.Name,a.Info,a.Original_price,a.Cheapest_price,a.IsOut,b.[Url] from Product as a,ProductPic as b where a.Product_Id = b.Product_Id and a.IsOut = 0 order by a.Cheapest_price").ToList();
+            return Query<ProductViewModel>("select a.Product_Id,a.Brand,a.Name,a.Color,a.Info,a.Original_price,a.Cheapest_price,a.IsOut,b.[Url] from Product as a,ProductPic as b where a.Product_Id = b.Product_Id and a.IsOut = 0 order by a.Cheapest_price").ToList();
         }
         public List<ProductViewModel> GetProductsHot()
         {
-            return Query<ProductViewModel>(@"select a.Product_Id,a.Brand,a.[Name],a.Original_price,a.Cheapest_price,a.IsOut,a.[Url],b.times
+            return Query<ProductViewModel>(@"select a.Product_Id,a.Brand,a.[Name],a.Color,a.Original_price,a.Cheapest_price,a.IsOut,a.[Url],b.times
                                             from (select p.Product_Id,p.Brand,p.[Name],p.Original_price,p.Cheapest_price,p.IsOut,ProductPic.[Url] from Product as p,ProductPic where p.Product_Id = ProductPic.Product_Id and p.IsOut = 0) as a
                                             left join (select Product_Id,sum(Quantity) as times from BuyHistory group by Product_Id ) as b
                                             on a.Product_Id = b.Product_Id
@@ -27,7 +27,7 @@ namespace FindYourFoundation.Repositoires
         }
         public List<ProductViewModel> GetProductsHotTop3()
         {
-            return Query<ProductViewModel>(@"select top 3 a.Product_Id,a.Brand,a.[Name],a.Original_price,a.Cheapest_price,a.IsOut,a.[Url],b.times
+            return Query<ProductViewModel>(@"select top 3 a.Product_Id,a.Brand,a.[Name],a.Color,a.Original_price,a.Cheapest_price,a.IsOut,a.[Url],b.times
                                             from (select p.Product_Id,p.Brand,p.[Name],p.Original_price,p.Cheapest_price,p.IsOut,ProductPic.[Url] from Product as p,ProductPic where p.Product_Id = ProductPic.Product_Id and p.IsOut = 0) as a
                                             left join (select Product_Id,sum(Quantity) as times from BuyHistory group by Product_Id ) as b
                                             on a.Product_Id = b.Product_Id
@@ -35,7 +35,7 @@ namespace FindYourFoundation.Repositoires
         }
         public List<ProductViewModel> SearchProduct(string search)
         {
-            return Query<ProductViewModel>("select a.Product_Id,a.Brand,a.Name,a.Info,a.Original_price,a.Cheapest_price,a.IsOut,b.[Url] from Product as a,ProductPic as b where a.Product_Id = b.Product_Id and a.IsOut = 0 and (a.Brand like '%" + @search + "' or a.[Name] like '%" + @search + "%') order by a.Cheapest_price desc", new { search }).ToList();
+            return Query<ProductViewModel>("select a.Product_Id,a.Brand,a.Name,a.Color,a.Info,a.Original_price,a.Cheapest_price,a.IsOut,b.[Url] from Product as a,ProductPic as b where a.Product_Id = b.Product_Id and a.IsOut = 0 and (a.Brand like '%" + @search + "' or a.[Name] like '%" + @search + "%') order by a.Cheapest_price desc", new { search }).ToList();
         }
         public List<Product> GetProductsDescForAdmin()
         {
