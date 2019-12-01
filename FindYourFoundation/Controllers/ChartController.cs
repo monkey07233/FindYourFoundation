@@ -206,10 +206,92 @@ namespace FindYourFoundation.Controllers
             return dateList;
         }
         [HttpGet]
+        public Web GetBuyFrequencyForWeb()
+        {
+            var jwtObject = GetjwtToken();
+            var frequency = _chartRepo.GetBuyFrequency(jwtObject["Account"].ToString());
+            var year = DateTime.Now.Year;
+            string[] mm = { "一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月" };
+            int[] month = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            foreach (var date in frequency)
+            {
+                if (date.Year == year)
+                {
+                    if (date.Month == 1)
+                    {
+                        month[0]++;
+                    }
+                    else if (date.Month == 2)
+                    {
+                        month[1]++;
+                    }
+                    else if (date.Month == 3)
+                    {
+                        month[2]++;
+                    }
+                    else if (date.Month == 4)
+                    {
+                        month[3]++;
+                    }
+                    else if (date.Month == 5)
+                    {
+                        month[4]++;
+                    }
+                    else if (date.Month == 6)
+                    {
+                        month[5]++;
+                    }
+                    else if (date.Month == 7)
+                    {
+                        month[6]++;
+                    }
+                    else if (date.Month == 8)
+                    {
+                        month[7]++;
+                    }
+                    else if (date.Month == 9)
+                    {
+                        month[8]++;
+                    }
+                    else if (date.Month == 10)
+                    {
+                        month[9]++;
+                    }
+                    else if (date.Month == 11)
+                    {
+                        month[10]++;
+                    }
+                    else if (date.Month == 12)
+                    {
+                        month[11]++;
+                    }
+                }
+            }
+            Web BuyFrequency = new Web();
+            BuyFrequency.labels = mm.ToList() ;
+            BuyFrequency.data = month.ToList();
+            return BuyFrequency;
+        }
+        [HttpGet]
         public List<PieChart> GetBuyBrand()
         {
             var jwtObject = GetjwtToken();
             return _chartRepo.GetBuyBrand(jwtObject["Account"].ToString());
+        }
+        [HttpGet]
+        public Web GetBuyBrandForWeb()
+        {
+            Web BuyBrand = new Web();
+            BuyBrand.labels = new List<string>();
+            BuyBrand.data = new List<int>();
+            var jwtObject = GetjwtToken();
+            var buybrand= _chartRepo.GetBuyBrand(jwtObject["Account"].ToString());
+            foreach(var buy in buybrand)
+            {
+                BuyBrand.labels.Add(buy.label);
+                BuyBrand.data.Add(buy.value);
+            }
+            return BuyBrand;
         }
         public Dictionary<string, object> GetjwtToken()
         {
