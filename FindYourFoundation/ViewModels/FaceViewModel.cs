@@ -15,5 +15,6 @@ namespace FindYourFoundation.ViewModels
         public string Name { get; set; }
         public string Ticket { get; set; }
         public string ProductUrl { get; set; }
+        public DateTime FaceDate { get; set; }
     }
 }

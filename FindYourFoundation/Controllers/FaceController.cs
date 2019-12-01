@@ -51,6 +51,7 @@ namespace FindYourFoundation.Controllers
                         faceViewModel.Name = product.Name;
                         faceViewModel.Ticket = product.Ticket;
                         faceViewModel.ProductUrl= "/ProductPic/" + Path.GetFileNameWithoutExtension(product.Url) + Path.GetExtension(Url);
+                        faceViewModel.FaceDate = DateTime.Now;
                         new FaceRepo().AddFaceHistory(Url, faceViewModel);
                     }
                 }               
