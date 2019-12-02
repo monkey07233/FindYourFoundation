@@ -13,7 +13,7 @@ namespace FindYourFoundation.ViewModels
         public int Product_Id { get; set; }
         public string Brand { get; set; }
         public string Name { get; set; }
-        public string Ticket { get; set; }
+        public string Color { get; set; }
         public string ProductUrl { get; set; }
         public DateTime FaceDate { get; set; }
     }
