@@ -23,7 +23,7 @@ namespace FindYourFoundation.Repositoires
         }
         public List<FaceViewModel> GetFaceHistoryByAcc(string Account)
         {
-            return Query<FaceViewModel>("select a.Account,a.[Url] as FaceUrl,a.FaceColor,a.Product_Id,b.Brand,b.[Name],b.Ticket,c.[Url] as ProductUrl,a.FaceDate from FaceHistory as a,Product as b,ProductPic as c where a.Product_Id = b.Product_Id and b.Product_Id = c.Product_Id and a.Account = @Account", new { Account }).ToList();
+            return Query<FaceViewModel>("select a.Account,a.[Url] as FaceUrl,a.FaceColor,a.Product_Id,b.Brand,b.[Name],b.Color,c.[Url] as ProductUrl,a.FaceDate from FaceHistory as a,Product as b,ProductPic as c where a.Product_Id = b.Product_Id and b.Product_Id = c.Product_Id and a.Account = @Account", new { Account }).ToList();
         }
     }
 }
