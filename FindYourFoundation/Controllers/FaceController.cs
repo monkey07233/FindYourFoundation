@@ -65,7 +65,8 @@ namespace FindYourFoundation.Controllers
                         file.SaveAs(Url);
                         faceViewModel.Account = jwtObject["Account"].ToString();
                         faceViewModel.FaceUrl = "/FacePic/" + Path.GetFileNameWithoutExtension(Url) + Path.GetExtension(Url);
-                        var skin = await _faceService.GetSkin(Path.GetFileNameWithoutExtension(Url) + Path.GetExtension(Url));
+                        string img= "http://foundation.hsc.nutc.edu.tw/FacePic/"+ Path.GetFileNameWithoutExtension(Url) + Path.GetExtension(Url);
+                        var skin = await _faceService.GetSkin(img);
                         string[] result = skin.Split(';');
                         faceViewModel.FaceColor = result[0];
                         var product = new ProductRepo().GetProductByTicket(result[1]);
