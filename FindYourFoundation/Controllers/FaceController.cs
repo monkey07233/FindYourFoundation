@@ -21,6 +21,29 @@ namespace FindYourFoundation.Controllers
         private FaceRepo _faceRepo = new FaceRepo();
         private string secret = "FindYourFoundation";
         [HttpPost]
+        public void InsertFacePic()
+        {
+            var jwtObject = GetjwtToken();
+            var HttpRequest = HttpContext.Current.Request;
+            if (HttpRequest.Files.Count > 0)
+            {
+                foreach (string name in HttpRequest.Files.Keys)
+                {
+                    var file = HttpRequest.Files[name];
+                    if ((!file.ContentType.Equals("image/jpg")) && (!file.ContentType.Equals("image/png")) && (!file.ContentType.Equals("image/jpeg")))
+                    {
+                        //result = "檔案格式請選取jpg,png";
+                    }
+                    else
+                    {
+                        string filename = jwtObject["Account"].ToString() + "_face_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".jpg";
+                        string Url = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath("~/FacePic/"), filename);
+                        file.SaveAs(Url);
+                    }
+                }
+            }
+        }
+        [HttpPost]
         public async Task<FaceViewModel> SkinDetection()
         {
             var jwtObject = GetjwtToken();
@@ -42,7 +65,7 @@ namespace FindYourFoundation.Controllers
                         file.SaveAs(Url);
                         faceViewModel.Account = jwtObject["Account"].ToString();
                         faceViewModel.FaceUrl = "/FacePic/" + Path.GetFileNameWithoutExtension(Url) + Path.GetExtension(Url);
-                        var skin = await _faceService.GetSkin(Url);
+                        var skin = await _faceService.GetSkin(Path.GetFileNameWithoutExtension(Url) + Path.GetExtension(Url));
                         string[] result = skin.Split(';');
                         faceViewModel.FaceColor = result[0];
                         var product = new ProductRepo().GetProductByTicket(result[1]);
