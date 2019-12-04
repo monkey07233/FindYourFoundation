@@ -12,6 +12,7 @@ namespace FindYourFoundation.Services
     {
         private ProductRepo _productRepo = new ProductRepo();
         public static string skin = "";
+        private static string AzureKey = "b7171b1bb51b462da557ceedebfd67fa"; 
         public async Task<string> GetSkin(string image)
         {
             var ticket = _productRepo.GetProTicket();
@@ -31,7 +32,7 @@ namespace FindYourFoundation.Services
                 //string path = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + name;
                 string path = @"D:/Python/" + name;
                 process.StartInfo.FileName = @"D:/Anaconda3/python.exe";
-                path += " " + img + " " + color ;
+                path +=" " + AzureKey + " " + img + " " + color ;
                 //path += " " + img;
                 process.StartInfo.Arguments = path;
                 process.StartInfo.UseShellExecute = false;

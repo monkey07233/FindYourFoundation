@@ -247,6 +247,7 @@
     <Compile Include="Repositoires\ProductPicRepo.cs" />
     <Compile Include="Repositoires\ProductRepo.cs" />
     <Compile Include="Repositoires\UserPicRepo.cs" />
+    <Compile Include="Services\BuyTimeCoupon.cs" />
     <Compile Include="Services\FaceService.cs" />
     <Compile Include="Services\MonthCoupon.cs" />
     <Compile Include="Services\BuyCoupon.cs" />
@@ -302,6 +303,7 @@
     <None Include="job_scheduling_data_2_0.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\PublishProfiles\FaceServer - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />

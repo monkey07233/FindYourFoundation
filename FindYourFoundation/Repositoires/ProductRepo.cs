@@ -169,11 +169,15 @@ namespace FindYourFoundation.Repositoires
         }
         public List<string> GetProTicket()
         {
-            return Query<string>("select Ticket from Product").ToList();
+            return Query<string>("select Ticket from Product where Product IsOut = 0").ToList();
         } 
         public ProductViewModel GetProductByTicket(string ticket)
         {
             return Query<ProductViewModel>("select a.Product_Id,a.Brand,a.[Name],a.Color,b.[Url] from Product as a,ProductPic as b where a.Product_Id = b.Product_Id and Ticket = @ticket", new { ticket }).FirstOrDefault();
+        }
+        public ProductViewModel GetProductByRandom(int id)
+        {
+            return Query<ProductViewModel>("select a.Product_Id,a.Brand,a.[Name],a.Color,b.[Url] from Product as a,ProductPic as b where a.Product_Id = b.Product_Id and a.Product_Id = @id", new { id }).FirstOrDefault();
         }
     }
 }

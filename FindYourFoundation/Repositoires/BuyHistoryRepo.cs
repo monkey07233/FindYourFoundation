@@ -15,7 +15,11 @@ namespace FindYourFoundation.Repositoires
         }
         public List<string> GetBuyTimes(string Account)
         {
-            return Query<string>("select convert(varchar,BuyTime,111) as times from BuyHistory where Account=@Account group by convert(varchar,BuyTime,111)", new { Account }).ToList();
+            return Query<string>("select convert(varchar,BuyTime,111) as times from BuyHistory where Account=@Account group by convert(varchar,BuyTime,111)", new { Account }).ToList();           
+        }
+        public List<string> GetBuyTimesDesc(string Account)
+        {
+            return Query<string>("select convert(varchar,BuyTime,111) as times from BuyHistory where Account=@Account group by convert(varchar,BuyTime,111)  order by times desc", new { Account }).ToList();
         }
     }
 }
